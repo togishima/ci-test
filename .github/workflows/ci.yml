@@ -1,6 +1,6 @@
 on:
   pull_request:
-    branches: [ master]
+    branches: [ master ]
 jobs:
   CI:
     runs-on: ubuntu-latest
@@ -14,7 +14,7 @@ jobs:
       - name: Syntax check
         run: |
           IS_ERROR=0
-          for FILE in `git diff HEAD ${{GITHUB_BASE_REF}} --name-only | grep .php`; do
+          for FILE in `git diff ${{ github.head_ref }} ${{ github.base_ref }} --name-only | grep .php`; do
               if ! php -l $FILE; then
                   IS_ERROR=1
                   break
